@@ -1,0 +1,67 @@
+﻿@using mvcproject; 
+
+@{
+    ViewData["Title"] = "Shop Page";
+}
+
+
+
+<!--Bat dau content cua san pham-->
+<div id="content">
+    <div class="container">
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <!--Thu tu trang-->
+                <li>
+                    <a href="/">Trang chủ</a>
+                </li>
+                <li>
+                    Cửa hàng
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-3">
+            @Html.Partial("~/Views/Sidebar/Index.cshtml")
+        </div>
+
+        <div class="col-md-9">
+
+            <div class="box">
+                <h1>Cửa hàng</h1>
+            </div>
+
+            <div id="products" class="row">
+                @foreach (var item in (List<Product>)ViewBag.ListProducts)
+                {
+                    <div class="col-md-4 col-sm-6 center-responsive">
+                        <div class="product">
+                            <a href="/Detail/Index?pro_id=@item.Product_id">
+                                <img class="img-responsive" src="~/product_images/@item.Product_img">
+                            </a>
+
+                            <div class="text">
+                                <h3>
+                                    <a href="/Detail/Index?pro_id=@item.Product_id"> @item.Product_title </a>
+                                </h3>
+
+                                <p class="price"> @item.Product_price <u>đ</u></p>
+                                <p class="button">
+                                    <a class="btn btn-default" href="/Detail/Index?pro_id=@item.Product_id">Chi tiết</a>
+                                    <a class="btn btn-primary" href="/Detail/Index?pro_id=@item.Product_id">
+                                        <i class="fa fa-shopping-cart"></i> Thêm giỏ hàng
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+<!--Ket thuc content cua san pham-->

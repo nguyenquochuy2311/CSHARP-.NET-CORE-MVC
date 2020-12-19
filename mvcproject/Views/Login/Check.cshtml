@@ -1,0 +1,22 @@
+﻿@using mvcproject;
+
+<!--<script type="text/javascript">
+    window.onload = function(){
+        alert('ViewData["noti"]');
+    };
+</script>-->
+
+
+
+
+@if (ViewData["noti"] == "Dang nhap thanh cong")
+{
+    //Html.Partial("~/Views/MyAccount/Index.cshtml");
+    //ViewData["Title"] = "Account Page";
+}
+else
+{
+    Html.Partial("~/Views/Login/Index.cshtml");
+}
+
+

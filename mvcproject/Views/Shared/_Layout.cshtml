@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset=" -8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/bootstrap-337.css" />
+        <link rel="stylesheet" href="~/css/style.css" />
+        <link rel="stylesheet" href="~/font-awesome/css/font-awesome.css" />
+    </environment>
+    <title>@ViewData["Title"]</title>
+    
+</head>
+
+<body>
+    <!-- Bat dau Top-->
+    <div id="top">
+        <div class="container">
+            <div class="col-md-6 offer">
+                <a href="#" class="btn btn-success btn-sm">
+                    Chào mừng : @ViewData["email"]
+                </a>
+                <a href="#">10 sản phẩm trong giỏ hàng | Tổng tiền: 10.000đ</a>
+            </div>
+            <div class="col-md-6">
+                <ul class="menu">
+                    @if(ViewData["email"]=="Quy khach")
+                    {
+                        <li>
+                            <a href="#">Đăng ký</a>
+                        </li>
+                        
+                    }
+                    <li>
+                        <a href="#">Tài khoản của tôi</a>
+                    </li>
+                    <li>
+                        <a href="#">Giỏ hàng</a>
+                    </li>
+                    <li>
+                        @if (ViewData["email"] == "Quy khach")
+                        {
+                            <a href="/Login/Index">
+                                Đăng nhập
+                            </a>
+                        }else {
+                            <a href="/Logout/Index">
+                               Đăng xuất
+                            </a>
+                        }
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--Ket thuc Top-->
+    <!--Bat dau Header-->
+    <div id="navbar" class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand home">
+                    <img style="width:125px;height:49px;" src="~/images/logo.jpg" alt="Lixibox Logo" class=hidden-xs>
+                    <img style="width:83px;height:33px;" src="~/images/logo.jpg" alt="Lixibox Logo Mobile"
+                         class="visible-xs">
+                </a>
+                <button class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <i class="fa fa-align-justify"></i>
+                </button>
+                <button class="navbar-toggle" data-toggle="collapse" data-target="#search">
+                    <span class="sr-only">Toggle Search</span>
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navigation">
+                <div class="padding-nav">
+                    <ul class="nav navbar-nav left">
+
+                        @{string a ="", b ="", c ="", d="", e="";}
+                        @switch (@ViewData["Title"])
+                        {
+                            case "Home Page":
+                                a = "active";
+                                break;
+                            case "Shop Page":
+                                b = "active";
+                                break;
+                            case "Account Page":
+                                c = "active";
+                                break;
+                            case "Cart Page":
+                                d = "active";
+                                break;
+                            case "Contact Page":
+                                e = "active";
+                                break;
+                            default:
+                                a = "active";
+                                break;
+                        }
+                            <li class=@a>
+                                <a href="/">Trang chủ</a>
+                            </li>
+
+                            <li class=@b>
+                                <a href="/Shop/Index">Cửa hàng</a>
+                            </li>
+
+                            <li class=@c>
+                                <a href="/MyAccount/Index">Tài khoản của tôi</a>
+                            </li>
+                            <li class=@d>
+                                <a href="/Cart/Index">Giỏ hàng</a>
+                            </li>
+
+                            <li class=@e>
+                                <a href="/Contact/Index">Liên hệ chúng tôi</a>
+                            </li>
+                    </ul>
+                </div>
+
+                <a href="#" class="btn navbar-btn btn-primary right">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>10 sản phẩm trong giỏ hàng</span>
+                </a>
+                <div class="navbar-collapse collapse right">
+                    <button class="btn btn-primary navbar-btn" type="button" data-toggle="collapse"
+                            data-target="#search">
+                        <span class="sr-only">Toggle Search</span>
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+
+                <div class="collapse clearfix" id="search">
+                    <form method="get" action="" class="navbar-form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Nhập tìm kiếm" name="search" required>
+                            <span class="input-group-btn">
+                                <button type="submit" name="ok" class="btn btn-primary">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3">
+                    <h4>L I X I B O X</h4>
+                    <p class="text-muted">
+                        www.lixibox.com là kênh mua sắm mỹ phẩm, làm đẹp hàng đầu Việt Nam được các beauty
+                        blogger lựa chọn
+                        để giới thiệu sản phẩm họ yêu thích tới khách hàng, người hâm mộ.
+                    </p>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <h4>Danh mục sản phẩm</h4>
+                    <ul>
+                        @{  
+                            List<Product_Category> P_cat = (List<Product_Category>)ViewData["ProductCategory"];
+                            foreach (var item in  P_cat)
+                            {
+                                <li>
+                                    <a href="#">
+                                        @item.P_cat_title
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <hr class="hidden-md hidden-lg">
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <h4>Thông tin & hướng dẫn</h4>
+                    <ul>
+                        <li>
+                            <a href="#">Về LIXIBOX</a>
+                        </li>
+                        <li>
+                            <a href="#">Hỗ trợ đơn hàng</a>
+                        </li>
+                        <li>
+                            <a href="#">Cửa hàng Lixibox</a>
+                        </li>
+                    </ul>
+                    <hr class="hidden-md hidden-lg">
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <h4>Tải ứng dụng LIXIBOX</h4>
+                    <h4>Hotline: 0375119131</h4>
+                    <label>
+                        <a href="https://play.google.com/store/apps/details?id=com.lixibox&hl=vi">
+                            <img style="background-color:black;" src="~/images/android-app.jpg">
+                        </a>
+                        <a href="https://apps.apple.com/vn/app/lixibox/id1078181334?l=vi">
+                            <img style="background-color:black;" src="~/images/ios-app.jpg">
+                        </a>
+                    </label>
+                    <hr>
+                    <p class="social">
+                        <a href="https://www.facebook.com/lixiboxvn/" class="fa fa-facebook"></a>
+                        <a href="https://www.instagram.com/lixibox/" class="fa fa-instagram"></a>
+                        <a href="https://www.youtube.com/channel/UCW0CxHcD9jN1lhFeKLHwCvQ" class="fa fa-youtube"></a>
+                        <a href="https://www.pinterest.com/lixibox/" class="fa fa-pinterest"></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <environment include="Development">
+        <script src="~/js/boostrap-337.js"></script>
+        <script src="~/js/jquery-331.js"></script>
+    </environment>
+    <script src="~/js/boostrap-337.js"></script>
+    <script src="~/js/jquery-331.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+﻿@using mvcproject;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (ViewData["noti"] != null)
+{
+    <script type="text/javascript">
+    window.onload = function(){
+        alert('@ViewData["noti"]');
+    };
+    </script>
+}
+<!--Bat dau Slide-->
+<div class="container" id="slider">
+    <div class="col-md-12">
+        <div class="carousel slide" id="myCarousel" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li class="active" data-target="#myCarousel" data-slide-to="0"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                @foreach (var item in (List<Slider>)ViewBag.ListSliders1)
+                {
+                    <div class="item active">
+                        <a href="#">
+                            <img style="width:1100px;height:490px;" src="~/slide-images/@item.Slider_image">
+                        </a>
+                    </div>
+                }
+                @foreach (var item in (List<Slider>)ViewBag.ListSliders)
+                {
+                    <div class="item">
+                        <a href="#">
+                            <img style="width:1100px;height:490px;" src="~/slide-images/@item.Slider_image">
+                        </a>
+                    </div>
+                }
+
+            </div>
+            <a href="#myCarousel" class="left carousel-control" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Truoc</span>
+            </a>
+
+            <a href="#myCarousel" class="right carousel-control" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Sau</span>
+            </a>
+        </div>
+    </div>
+</div>
+<!--Ket thuc Slide-->
+
+<div class="advantages">
+    <div class="container">
+        <div class="same-height-row">
+
+            @foreach (var item in (List<Box>)ViewBag.ListBoxes)
+            {
+                <div class="col-sm-4">
+                    <div class="box same-height">
+                        <div class="icon">
+                            <i class="fa fa-heart"></i>
+                        </div>
+                        <h3><a href="#">@item.Box_title</a></h3>
+                        <p>@item.Box_desc</p>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<!--Bat dau khung Hot deal-->
+<div id="hot">
+    <div class="box">
+        <div class="container">
+            <div class="col-md-12">
+                <h2>HOT DEAL</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Ket thuc khung Hot deal-->
+<!--Bat dau content cua hot deal-->
+<div id="content" class="container">
+    <div class="row">
+        @foreach (var item in (List<Product>)ViewBag.ListProducts)
+        {
+            <div class="col-md-4 col-sm-6 single">
+                <div class="product">
+                    <a href="/Detail/Index?pro_id=@item.Product_id">
+                        <img class="img-responsive" src="~/product_images/@item.Product_img">
+                    </a>
+
+                    <div class="text">
+                        <h3>
+                            <a href="/Detail/Index?pro_id=@item.Product_id"> @item.Product_title </a>
+                        </h3>
+
+                        <p class="price"> @item.Product_price <u>đ</u></p>
+                        <p class="button">
+                            <a class="btn btn-default" href="/Detail/Index?pro_id=@item.Product_id">Chi tiết</a>
+                            <a class="btn btn-primary" href="/Detail/Index?pro_id=@item.Product_id">
+                                <i class="fa fa-shopping-cart"></i> Thêm giỏ hàng
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<!--Ket thuc content cua hot deal-->

@@ -1,0 +1,64 @@
+﻿@using mvcproject;
+@{
+    ViewData["Title"] = "Checkout Page";
+}
+
+<div id="content">
+    <div class="container">
+        <div class="col-md-12">
+
+            <ul class="breadcrumb">
+                <!--Thu tu trang-->
+                <li>
+                    <a href="/">Trang chủ</a>
+                </li>
+                <li>
+                    Đăng nhập
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-3">
+            @Html.Partial("~/Views/Sidebar/Index.cshtml")
+        </div>
+
+        <div class="col-md-9">
+            <div class="box">
+                <div class="box-header">
+                    <center>
+                        <h1>Đăng nhập</h1>
+                        <p class="lead">Bạn đã có tài khoản..?</p>
+                        <p class="text-muted">
+                            Nếu có bất kỳ câu hỏi gì, vui lòng liên hệ đến mục <a href="/Contact/Index">
+                                <bold>Liên hệ</bold>
+                            </a>. Dịch vụ chăm sóc khách hàng làm việc <strong>24/7</strong>
+                        </p>
+                    </center>
+                </div>
+
+                <form action="/Login/Check" method="post">
+                    <div class="form-group">
+                        <label> Email </label>
+                        <input name="Customer_email" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label> Mật khẩu </label>
+                        <input name="Customer_pass" type="password" class="form-control" required>
+                    </div>
+                    <div class="text-center">
+                        <button name="login" value="login" class="btn btn-primary">
+                            <i class="fa fa-sign-in"></i> Đăng nhập
+                        </button>
+                    </div>
+                </form>
+
+                <center>
+                    <a href="#">
+                        <h4> Chưa có tài khoản..? Đăng ký tại đây </h4>
+                    </a>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+

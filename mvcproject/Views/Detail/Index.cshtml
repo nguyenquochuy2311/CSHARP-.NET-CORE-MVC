@@ -1,0 +1,182 @@
+﻿@using mvcproject;
+
+@{
+    ViewData["Title"] = "Shop Page";
+}
+
+@{
+    Product item_detail = (Product)ViewData["Product_Detail"];
+}
+
+<!--Bat dau content cua san pham-->
+<div id="content">
+    <div class="container">
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <!--Thu tu trang-->
+                <li>
+                    <a href="/">Trang chủ</a>
+                </li>
+                <li>
+                    Cửa hàng
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-3">
+            @Html.Partial("~/Views/Sidebar/Index.cshtml")
+        </div>
+
+        <div class="col-md-9">
+            @{
+                <div id="productMain" class="row">
+                    <div class="col-sm-6">
+                        <div id="mainImage">
+                            <div id="myCarousel" class="carousel slide" data-target="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                                </ol>
+
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <center>
+                                            <img src="~/product_images/@item_detail.Product_img"
+                                                 alt="Product 1-a" class="img-responsive">
+                                        </center>
+                                    </div>
+                                    <div class="item">
+                                        <center>
+                                            <img src="~/product_images/@item_detail.Product_img"
+                                                 alt="Product 1-b" class="img-responsive">
+                                        </center>
+                                    </div>
+                                    <div class="item">
+                                        <center>
+                                            <img src="~/product_images/@item_detail.Product_img"
+                                                 alt="Product 1-c" class="img-responsive">
+                                        </center>
+                                    </div>
+                                </div>
+
+                                <a href="#myCarousel" class="left carousel-control" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    <span class="sr-only">Truoc</span>
+                                </a>
+
+                                <a href="#myCarousel" class="right carousel-control" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                    <span class="sr-only">Sau</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="box">
+                            <h1 class="text-center">@item_detail.Product_title</h1>
+
+                            <form action="/Cart/AddtoCart" class="form-horizontal"
+                                  method="POST">
+                                <input type="text" hidden name="Product_id" value="@item_detail.Product_id">
+                                <div class="form-group">
+                                    <label for="" class="col-md-5 control-label">Số lượng</label>
+
+                                    <div class="col-md-7">
+                                        <input type="number" value=1 min=1 name="Qty" style="width:50px;">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label">Kích cỡ</label>
+                                    <div class="col-md-7">
+                                        <select name="Size" class="form-control" required
+                                                oninput="setCustomValidity('')"
+                                                oninvalid="setCustomValidity('Phải chọn kích cỡ sản phẩm')">
+
+                                            <option disabled selected>Lựa chọn kích cỡ</option>
+                                            <option>Small</option>
+                                            <option>Medium</option>
+                                            <option>Large</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <p class="price"><strong>@item_detail.Product_price đ</strong></p>
+
+                                <p class="text-center button">
+                                    <button class="btn btn-primary i fa fa-shopping-cart"> Thêm giỏ hàng</button>
+                                </p>
+                            </form>
+                        </div>
+
+                        <div class="row" id="thumbs">
+                            <div class="col-xs-4">
+                                <a data-target="#myCarousel" data-slide-to="0" href="#" class="thumb">
+                                    <img src="~/product_images/@item_detail.Product_img" alt="Product 1-a"
+                                         class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a data-target="#myCarousel" data-slide-to="1" href="#" class="thumb">
+                                    <img src="~/product_images/@item_detail.Product_img" alt="Product 1-b"
+                                         class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a data-target="#myCarousel" data-slide-to="2" href="#" class="thumb">
+                                    <img src="~/product_images/@item_detail.Product_img" alt="Product 1-c"
+                                         class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box" id="details">
+                    <h4>Chi tiết sản phẩm</h4>
+                    <p>
+                        @item_detail.Product_desc
+                    </p>
+                    <h4>Size</h4>
+                    <ul>
+                        <li>Small</li>
+                        <li>Medium</li>
+                        <li>Large</li>
+                    </ul>
+                </div>
+            }
+
+        <div id="row same-heigh-row">
+            <div class="col-md-3 col-sm-6">
+                <div class="box same-height headline">
+                    <h3 class="text-center">Sản phẩm liên quan</h3>
+                </div>
+            </div>
+                @foreach (var item in (List<Product>)ViewBag.ProductOffer)
+                {
+                    <div class="col-md-3 col-sm-6 center-responsive">
+                        <div class="product same-height">
+                            <a href="/Detail/Index?pro_id=@item.Product_id">
+                                <img class="img-responsive" src="~/product_images/@item.Product_img" alt="Product @item.Product_id">
+                            </a>
+
+                            <div class="text">
+                                <h3>
+                                    <a href="/Detail/Index?pro_id=@item.Product_id"> @item.Product_title </a>
+                                </h3>
+                                <p class="price"><strong>@item.Product_price <u>đ</u></strong></p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+        </div>
+        </div>
+    </div>
+
+</div>
+<!--Ket thuc content cua san pham-->

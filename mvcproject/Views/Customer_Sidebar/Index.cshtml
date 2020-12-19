@@ -1,0 +1,19 @@
+﻿@if (ViewBag.Customer != null)
+{
+    Customer item = (Customer)ViewBag.Customer;
+
+    <div class="panel panel-default sidebar-menu">
+        <div class="panel-heading">
+            <center>
+                <img style="width:210px;height:270px;" src="~/customer_images/@item.Customer_image" alt="Customer Image">
+            </center>
+            <br />
+            <h1 style="font-size:20px;" align="center" class="panel-title">
+                <strong>@item.Customer_name</strong>
+            </h1>
+        </div>
+        <div class="panel-body">
+        </div>
+    </div>
+}
+
