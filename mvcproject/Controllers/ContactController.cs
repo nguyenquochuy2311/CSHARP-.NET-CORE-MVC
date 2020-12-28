@@ -23,10 +23,16 @@ namespace mvcproject.Controllers
 
             ViewBag.ListProducts = DataStore.Instance.Get(DataStore.PRODUCT);
 
-            if (HttpContext.Session.GetString("email") != "")
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(mvcproject.Models.StoreContext)) as StoreContext;
+
+            if (HttpContext.Session.GetString("email") != null)
                 ViewData["email"] = DataStore.Instance.Get_Session(HttpContext.Session.GetString("email"));
             else
                 ViewData["email"] = DataStore.Instance.Get_Session(DataStore.GET_EMAIL);
+
+            ViewData["count_cart"] = context.Count_Cart();
+
+            ViewData["sum_money"] = context.Sum_Cart();
 
             return View();
         }

@@ -1,0 +1,68 @@
+﻿@{
+    Customer customer = ViewBag.Customer;
+}
+<div class="box">
+    <div class="panel-body">
+        <center>
+            <img style='width:210px;height:270px;' src='~/customer_images/@customer.Customer_image' alt='Customer Image'>
+        </center>
+        <br />
+        <h1 style='font-size:20px;' align='center' class='panel-title'>
+            <strong>@customer.Customer_name</strong>
+        </h1>
+        <ul class="nav-pills nav-stacked nav">
+            @{string a = "", b = "", c = "", d = "", e = "", f = "";}
+            @switch (ViewData["Title"])
+            {
+                case "My Order":
+                    a = "active"; break;
+                case "Offline Payment":
+                    b = "active"; break;
+                case "Edit Information":
+                    c = "active"; break;
+                case "Change Password":
+                    d = "active"; break;
+                case "Delete Account":
+                    e = "active"; break;
+                case "Log out":
+                    f = "active"; break;
+            }
+            <li class=@a>
+                <a href="/MyAccount/MyOrder">
+                    <i class="fa fa-list"></i> Đơn hàng của tôi
+                </a>
+            </li>
+
+            <li class=@b>
+                <a href="/MyAccount/OfflinePayment">
+                    <i class="fa fa-bolt"></i> Thanh toán offline
+                </a>
+            </li>
+
+            <li class=@c>
+                <a href="/MyAccount/EditInformation">
+                    <i class="fa fa-pencil"></i> Chỉnh sửa thông tin
+                </a>
+            </li>
+
+            <li class=@d>
+                <a href="/MyAccount/ChangePassword">
+                    <i class="fa fa-user"></i> Thay đổi mật khẩu
+                </a>
+            </li>
+
+            <li class=@e>
+                <a href="/MyAccount/DeleteAccount">
+                    <i class="fa fa-trash-o"></i> Xoá tài khoản
+                </a>
+            </li>
+
+            <li class=@f>
+                <a href="/Logout/Index">
+                    <i class="fa fa-sign-out"></i> Đăng xuất
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>

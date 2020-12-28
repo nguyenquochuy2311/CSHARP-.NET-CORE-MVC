@@ -1,7 +1,19 @@
 ﻿@using mvcproject;
 @{
-    ViewData["Title"] = "Checkout Page";
+    ViewData["Title"] = "Account Page";
 }
+
+@if (ViewData["chk_login"] != null)
+{
+    
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('@ViewData["chk_login"]');
+        };
+    </script>
+   
+}
+
 
 <div id="content">
     <div class="container">

@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "My Order";
+}
+
+<div class="container">
+    <div class="col-md-3">
+        @Html.Partial("~/Views/MyAccount/SidebarAccount.cshtml");
+    </div>
+    <div class="col-md-9">
+        <div class="box">
+            <div class="table-responsive">
+                <table class="table table-borded table-hover">
+                    <thead>
+                        <tr>
+                            <th> STT </th>
+                            <th> Số tiền </th>
+                            <th> Mã hoá đơn </th>
+                            <th> Số lượng </th>
+                            <th> Kích cỡ </th>
+                            <th> Ngày đặt hàng </th>
+                            <th> Tình trạng </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int count = 0;
+                        }
+                        @foreach (MyOrder myorder in (List<MyOrder>)ViewBag.MyOrder)
+                        {
+                            <tr>
+                                <th> @count </th>
+                                <td> @myorder.Due_amount đ </td>
+                                <td> @myorder.Invoice_no </td>
+                                <td> @myorder.Qty </td>
+                                <td> @myorder.Size </td>
+                                <td> @myorder.Order_date </td>
+                                <td id="status"> @myorder.Order_status </td>
+                                @if (@myorder.Order_status != "Hoàn tất")
+                                {
+                                    <td>
+                                        <a href="/MyAccount/MyOrder_Confirm?order_id=@myorder.Order_id" class="btn btn-primary btn-sm confirm"> Xác nhận </a>
+                                    </td>
+                                }
+                            </tr>
+                            count++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

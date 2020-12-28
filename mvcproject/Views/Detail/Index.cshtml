@@ -4,6 +4,26 @@
     ViewData["Title"] = "Shop Page";
 }
 
+@if (ViewData["check_addcart"] != null)
+{
+    if (Convert.ToInt32(ViewData["check_addcart"]) == 1)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("Them san pham vao gio hang thanh cong");
+            };
+        </script>
+    }
+    else
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("San pham ton tai trong gio hang, vui long kiem tra gio hang");
+            };
+        </script>
+    }
+}
+
 @{
     Product item_detail = (Product)ViewData["Product_Detail"];
 }
@@ -149,12 +169,12 @@
                 </div>
             }
 
-        <div id="row same-heigh-row">
-            <div class="col-md-3 col-sm-6">
-                <div class="box same-height headline">
-                    <h3 class="text-center">Sản phẩm liên quan</h3>
+            <div id="row same-heigh-row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="box same-height headline">
+                        <h3 class="text-center">Sản phẩm liên quan</h3>
+                    </div>
                 </div>
-            </div>
                 @foreach (var item in (List<Product>)ViewBag.ProductOffer)
                 {
                     <div class="col-md-3 col-sm-6 center-responsive">
@@ -174,7 +194,7 @@
                 }
 
 
-        </div>
+            </div>
         </div>
     </div>
 

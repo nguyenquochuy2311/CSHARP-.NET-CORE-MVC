@@ -26,12 +26,12 @@ namespace mvcproject.Models
 
         public Cart() { }
     }
-    public class CartItem
+    public class CartItem   
     {
         public Product _Cart_product { get; set; }
+        public string _Ip_add { get; set; }
         public int _Qty { get; set; }
         public string _Size { get; set; }
-
-        public string _Ip_add { get; set; }
+        public CartItem() { }
     }
 }

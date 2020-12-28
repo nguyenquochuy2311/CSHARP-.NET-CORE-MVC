@@ -21,6 +21,7 @@ namespace mvcproject.Controllers
         public const string MANUFACTURER = "MANUFACTURER";
         public const string DETAIL_PRODUCT = "DETAIL_PRODUCT";
         public const string GET_EMAIL = "Quy khach";
+        public const string GET_ADMIN = "ADMIN";
 
         public const string INSERT_RECORD = "INSERT_RECORD";
         public const string UPDATE_RECORD = "UPDATE_RECORD";
@@ -55,19 +56,6 @@ namespace mvcproject.Controllers
             if (email == null)
                 return GET_EMAIL;
             return email;
-        }
-        public object Get_ID(string name, string id)
-        {
-
-            switch (name)
-            {
-                case DETAIL_PRODUCT:
-                    if (globalModel.Detail_product == null)
-                        globalModel.Detail_product = (List<Product>)HandleGetContext_ID(name, id);
-                    return globalModel.Detail_product;
-                default:
-                    return default;
-            }
         }
  
         public object Get(string name)
@@ -112,7 +100,6 @@ namespace mvcproject.Controllers
                     if (globalModel.Email == null)
                         globalModel.Email = HandleGetContext(name).ToString();
                     return globalModel.Email;
-
                 case GLOBAL_MODEL:
                     return globalModel;
 
@@ -152,15 +139,6 @@ namespace mvcproject.Controllers
                     return default;
             }
         }
-        private object HandleGetContext_ID(string name, string id)
-        {
-            switch (name)
-            {
-                case DETAIL_PRODUCT:
-                    return globalContext.GetProducts_Detail(id);
-                default:
-                    return default;
-            }
-        }
+       
     }
 }

@@ -2,6 +2,12 @@
 @{
     ViewData["Title"] = "Cart Page";
 }
+
+@{
+    int sum_init = 0;
+    int sum_all = 0;
+}
+
 <!--Bat dau content cua san pham-->
 <div id="content">
     <div class="container">
@@ -18,10 +24,10 @@
         </div>
         <div id="cart" class="col-md-9">
             <div class="box">
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="/Checkout/Index" method="post" enctype="multipart/form-data">
                     <h1>Giỏ hàng của bạn</h1>
 
-                    <p class="text-muted">0 sản phẩm ở hiện tại</p>
+                    <p class="text-muted">@ViewData["count_cart"] sản phẩm ở hiện tại</p>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -35,35 +41,63 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
 
-
+                                @foreach (var item in (List<CartItem>)ViewData["items_cart"])
+                                {
+                                    <tr>
+                                        <td>
+                                            <img class="img-responsive"
+                                                 src="~/product_images/@item._Cart_product.Product_img"
+                                                 alt="Product 1a">
+                                        </td>
+                                        <td>
+                                            <a href="/Detail/Index?pro_id=@item._Cart_product.Product_id">
+                                                @item._Cart_product.Product_title
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <input min=1 type="number" value="@item._Qty" onchange="callUpdate(@item._Cart_product.Product_id.ToString(),@item._Qty+1)">
+                                        </td>
+                                        <td>
+                                            @item._Cart_product.Product_price
+                                        </td>
+                                        <td>
+                                            @item._Size
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="remove[]" value=""
+                                                   onchange="callDelete(@item._Cart_product.Product_id.ToString())">
+                                        </td>
+                                        @{
+                                            sum_init = item._Cart_product.Product_price * item._Qty;
+                                            sum_all += sum_init;
+                                        }
+                                        <td>
+                                            @sum_init
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
 
-                                <tfoot>
-                                    <tr>
-                                        <th colspan="5">Tổng tiền</th>
-                                        <th colspan="2">0 <u>đ</u></th>
-                                    </tr>
-                                </tfoot>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="5">Tổng tiền</th>
+                                    <th colspan="2">@sum_all <u>đ</u></th>
+                                </tr>
+                            </tfoot>
 
-                            </table>
+                        </table>
                     </div>
 
                     <div class="box-footer">
                         <div class="pull-left">
-                            <a href="#" class="btn btn-default">
+                            <a href="/Shop/Index" class="btn btn-default">
                                 <i class="fa fa-fa-chevron-circle-left"></i>Quay lại cửa hàng
                             </a>
                         </div>
 
                         <div class="pull-right">
-                            <button id="update" type="submit" name="update" value="Cập nhật giỏ hàng"
-                                    class="btn btn-default">
-                                <i class="fa fa-refresh"></i>Cập nhật giỏ hàng
-                            </button>
-
-                            <a href="#" class="btn btn-primary">
+                            <a href="/Checkout/Index" class="btn btn-primary">
                                 Tiến hành thanh toán <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
@@ -112,7 +146,7 @@
                         <tbody>
                             <tr>
                                 <td> Tổng đơn hàng </td>
-                                <th> 0 </th>
+                                <th> @sum_all <u>đ</u> </th>
                             </tr>
                             <tr>
                                 <td> Phí vận chuyển và ship </td>
@@ -124,7 +158,7 @@
                             </tr>
                             <tr class="total">
                                 <td> Tổng </td>
-                                <th> 0 </th>
+                                <th> @sum_all <u>đ</u> </th>
                             </tr>
                         </tbody>
                     </table>
@@ -135,3 +169,65 @@
 
 </div>
 <!--Ket thuc content cua san pham-->
+
+<script>
+    function callDelete(value) {
+        window.location.href = "/Cart/Delete_Item?pro_id=" + value;
+    }
+</script>
+
+<script>
+    function callUpdate(pro_id, pro_qty) {
+        window.location.href = "/Cart/Update_Qty?pro_id=" + pro_id + "&qty=" + pro_qty;
+    }
+</script>
+
+<script src="~/js/jquery-331.js"></script>
+<script src="~/js/boostrap-337.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.nav-toggle').click(function () {
+            $('.panel-collapse,.collapse-data').slideToggle(700, function () {
+
+                if ($(this).css('display') == 'none') {
+                    $(".hide-show").html('Mở');
+                } else {
+                    $(".hide-show").html('Ẩn');
+                }
+
+            });
+        });
+
+        $(function () {
+            $.fn.extend({
+                filterTable: function () {
+                    return this.each(function () {
+
+                        $(this).on('keyup', function () {
+
+                            var $this = $(this),
+                                search = $this.val().toLowerCase(),
+                                target = $this.attr('data-filters'),
+                                handle = $(target),
+                                rows = handle.find('li a');
+
+                            if (search == '') {
+                                rows.show();
+                            } else {
+                                rows.each(function () {
+                                    var $this = $(this);
+
+                                    $this.text().toLowerCase().indexOf(
+                                        search) === -1 ?
+                                        $this.hide() : $this.show();
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+            $('[data-action="filter"][id="dev-table-filter"]').filterTable();
+        });
+    });
+</script>

@@ -29,9 +29,15 @@ namespace mvcproject.Controllers
 
             ViewBag.ListProducts = DataStore.Instance.Get(DataStore.PRODUCT);
 
-            HttpContext.Session.SetString("email", "");
+            HttpContext.Session.Clear();
 
             ViewData["email"] = DataStore.Instance.Get_Session(DataStore.GET_EMAIL);
+
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(mvcproject.Models.StoreContext)) as StoreContext;
+
+            ViewData["count_cart"] = context.Count_Cart();
+
+            ViewData["sum_money"] = context.Sum_Cart();
 
             return Redirect("/Home/Index");
         }

@@ -29,12 +29,27 @@ namespace mvcproject.Controllers
 
             ViewBag.ListProducts = DataStore.Instance.Get(DataStore.PRODUCT);
 
-            if (HttpContext.Session.GetString("email") != null)
-                ViewData["email"] = DataStore.Instance.Get_Session(HttpContext.Session.GetString("email"));
-            else
-                ViewData["email"] = DataStore.Instance.Get_Session(DataStore.GET_EMAIL);
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(mvcproject.Models.StoreContext)) as StoreContext;
 
-            return View();
+            ViewData["count_cart"] = context.Count_Cart();
+
+            ViewData["sum_money"] = context.Sum_Cart();
+
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                ViewData["email"] = DataStore.Instance.Get_Session(HttpContext.Session.GetString("email"));              
+            }
+            else
+            {
+                ViewData["email"] = DataStore.Instance.Get_Session(DataStore.GET_EMAIL);
+                if(HttpContext.Session.GetInt32("chk_login")==0)
+                {
+                    HttpContext.Session.Remove("chk_login");
+                    ViewData["chk_login"] = "Email hoac mat khau khong dung";       
+                }
+                return View();
+            }
+            return View();     
         }
         public IActionResult Check(Customer c)
         {
@@ -54,23 +69,34 @@ namespace mvcproject.Controllers
 
             StoreContext context = HttpContext.RequestServices.GetService(typeof(mvcproject.Models.StoreContext)) as StoreContext;
 
+            ViewData["count_cart"] = context.Count_Cart();
+
+            ViewData["sum_money"] = context.Sum_Cart();
+
             int count = context.Count_Customer(c.Customer_email, c.Customer_pass);
 
             if (count == 0)
             {
-                ViewData["noti"] = "Email hoac mat khau khong chinh xac";
+                HttpContext.Session.SetInt32("chk_login", 0);
+
                 ViewData["email"] = DataStore.Instance.Get(DataStore.GET_EMAIL);
-                return View();
+
+                return Redirect("/Login/Index");
             }
             else
             {
                 Customer _c = context.GetCustomer_Login(c.Customer_email, c.Customer_pass);
-                ViewData["noti"] = "Dang nhap thanh cong";
+
+                HttpContext.Session.SetInt32("chk_login", 1);
+
                 HttpContext.Session.SetString("email", c.Customer_email.ToString());
+
                 ViewData["email"] = DataStore.Instance.Get_Session(c.Customer_email.ToString());
+
                 return Redirect("/Home/Index");
             }
 
+            
         }
     }
 }

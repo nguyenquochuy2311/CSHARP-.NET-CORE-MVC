@@ -1,0 +1,157 @@
+﻿@using mvcproject.Areas.Admin.Models;
+@using mvcproject.Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Admin Page";
+    Layout = "_Admin";
+}
+
+@{
+    Admin item = (Admin)ViewData["admin"];
+    List<Product_Category> p_cates = (List<Product_Category>)ViewData["p_cat"];
+    List<Category> cates = (List<Category>)ViewData["cat"];
+    List<Manufacturer> manus = (List<Manufacturer>)ViewData["get_manu"];
+}
+
+@if (ViewData["chk_addproduct"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('Them loi');
+        };
+    </script>
+}
+
+
+<div id="wrapper">
+    @Html.Partial("Sidebar")
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-dashboard"></i> Bảng điều khiển / Thêm sản phẩm
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-money fa-fw"></i> Thêm sản phẩm
+                            </h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <form method="post" asp-area="Admin" asp-controller="Admin" asp-action="Confirm_AddProduct" class="form-horizontal" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Tiêu đề sản phẩm </label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="Product_title" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Danh mục sản phẩm </label>
+                                    <div class="col-md-6">
+                                        <select name="P_cat_id" class="form-control" required>
+                                            <option disabled selected> Chọn danh mục sản phẩm</option>
+
+                                            @foreach (var item_p_cat in p_cates)
+                                            {
+                                                <option value="@item_p_cat.P_cat_id">@item_p_cat.P_cat_title</option>
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Danh mục giới tính </label>
+                                    <div class="col-md-6">
+                                        <select name="Cat_id" class="form-control" required>
+                                            <option disabled selected> Chọn danh mục giới tính</option>
+
+                                            @foreach (var item_cat in cates)
+                                            {
+                                                <option value="@item_cat.Cat_id">@item_cat.Cat_title</option>
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Nhà sản xuất </label>
+                                    <div class="col-md-6">
+                                        <select name="Manufacturer_id" class="form-control" required>
+                                            <option disabled selected> Chọn nhà sản xuất</option>
+
+                                            @foreach (var item_manu in manus)
+                                            {
+                                                <option value="@item_manu.Manufacturer_id">@item_manu.Manufacturer_title</option>
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Hình ảnh sản phẩm </label>
+                                    <div class="col-md-6">
+                                        <input type="file" name="files" class="form-control" multiple required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Giá sản phẩm </label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="Product_price" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Từ khoá về sản phẩm </label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="Product_keywords" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Mô tả sản phẩm </label>
+                                    <div class="col-md-6">
+                                        <textarea name="Product_desc" class="form-control" cols="19" rows="6"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"></label>
+                                    <div class="col-md-6">
+                                        <input name="submit" value="Thêm sản phẩm" type="submit"
+                                               class="btn btn-primary form-control">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/boostrap-337.js"></script>
+<script src="~/js/jquery-331.js"></script>
+
+<script src="~/js/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea'
+    });
+</script>

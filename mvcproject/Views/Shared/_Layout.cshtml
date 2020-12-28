@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset=" -8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <environment include="Development">
         <link rel="stylesheet" href="~/css/bootstrap-337.css" />
@@ -21,25 +21,25 @@
                 <a href="#" class="btn btn-success btn-sm">
                     Chào mừng : @ViewData["email"]
                 </a>
-                <a href="#">10 sản phẩm trong giỏ hàng | Tổng tiền: 10.000đ</a>
+                <a href="#">@ViewData["count_cart"] sản phẩm trong giỏ hàng | Tổng tiền:  @ViewData["sum_money"] <u>đ</u></a>
             </div>
             <div class="col-md-6">
                 <ul class="menu">
-                    @if(ViewData["email"]=="Quy khach")
+                    @if(ViewData["email"].ToString()=="Quy khach")
                     {
                         <li>
-                            <a href="#">Đăng ký</a>
+                            <a href="/Register/Index">Đăng ký</a>
                         </li>
                         
                     }
                     <li>
-                        <a href="#">Tài khoản của tôi</a>
+                        <a href="/MyAccount/Index">Tài khoản của tôi</a>
                     </li>
                     <li>
-                        <a href="#">Giỏ hàng</a>
+                        <a href="/Cart/Index">Giỏ hàng</a>
                     </li>
                     <li>
-                        @if (ViewData["email"] == "Quy khach")
+                        @if (ViewData["email"].ToString() == "Quy khach")
                         {
                             <a href="/Login/Index">
                                 Đăng nhập
@@ -121,9 +121,9 @@
                     </ul>
                 </div>
 
-                <a href="#" class="btn navbar-btn btn-primary right">
+                <a href="/Cart/Index" class="btn navbar-btn btn-primary right">
                     <i class="fa fa-shopping-cart"></i>
-                    <span>10 sản phẩm trong giỏ hàng</span>
+                    <span>@ViewData["count_cart"] sản phẩm trong giỏ hàng</span>
                 </a>
                 <div class="navbar-collapse collapse right">
                     <button class="btn btn-primary navbar-btn" type="button" data-toggle="collapse"

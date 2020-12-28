@@ -1,0 +1,228 @@
+﻿@using mvcproject.Areas.Admin.Models;
+@using mvcproject.Models;
+@{
+    Layout = "_Admin";
+}
+
+@{
+    Admin item = (Admin)ViewData["admin"];
+}
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+
+            <span class="sr-only">Toggle Navigation</span>
+
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+
+        </button>
+        <a href="/Admin/Admin/Index" class="navbar-brand">Admin</a>
+    </div>
+
+    <ul class="nav navbar-right top-nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-user"></i> @item.Admin_name <b class="caret"></b>
+            </a>
+
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="">
+                        <i class="fa fa-fw fa-user"></i> Hồ sơ
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Admin/Admin/View_Product">
+                        <i class="fa fa-fw fa-envelope"></i> Sản phẩm
+                        <span class="badge">@ViewData["count_product"]</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="">
+                        <i class="fa fa-fw fa-users"></i> Khách hàng
+                        <span class="badge">@ViewData["count_customer"]</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="">
+                        <i class="fa fa-fw fa-gear"></i> Danh mục sản phẩm
+                        <span class="badge">@ViewData["count_p_cat"]</span>
+                    </a>
+                </li>
+
+                <li class="divider"></li>
+
+                <li>
+                    <a href="/Admin/Admin/Logout">
+                        <i class="fa fa-fw fa-power-off"></i> Đăng xuất
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+    </ul>
+
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+            <li>
+                <a href="/Admin/Admin/Index">
+                    <i class="fa fa-fw fa-dashboard"></i> Bảng điều khiển
+                </a>
+            </li>
+
+            <li>
+                <a href="#" data-toggle="collapse" data-target="#manufacturers">
+                    <i class="fa fa-fw fa-star"></i> Thương hiệu
+                    <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+
+                <ul id="manufacturers" class="collapse">
+                    <li>
+                        <a href="/Admin/Admin/Add_Manu"> Thêm thương hiệu </a>
+                    </li>
+                    <li>
+                        <a href="/Admin/Admin/View_Manu"> Xem thương hiệu </a>
+                    </li>
+                </ul>
+
+            </li>
+
+            <li>
+                <a href="#" data-toggle="collapse" data-target="#products">
+                    <i class="fa fa-fw fa-tag"></i> Sản phẩm
+                    <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+
+                <ul id="products" class="collapse">
+                    <li>
+                        <a href="/Admin/Admin/Add_Product"> Thêm sản phẩm </a>
+                    </li>
+                    <li>
+                        <a href="/Admin/Admin/View_Product"> Xem sản phẩm </a>
+                    </li>
+                </ul>
+
+            </li>
+
+            <li>
+                <a href="#" data-toggle="collapse" data-target="#p_cat">
+                    <i class="fa fa-fw fa-edit"></i> Danh mục sản phẩm
+                    <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+
+                <ul id="p_cat" class="collapse">
+                    <li>
+                        <a href=""> Thêm danh mục sản phẩm </a>
+                    </li>
+                    <li>
+                        <a href=""> Xem danh mục sản phẩm </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#" data-toggle="collapse" data-target="#cat">
+                    <i class="fa fa-fw fa-book"></i> Danh mục giới tính
+                    <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+
+                <ul id="cat" class="collapse">
+                    <li>
+                        <a href=""> Thêm danh mục giới tính </a>
+                    </li>
+                    <li>
+                        <a href=""> Xem danh mục giới tính </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#" data-toggle="collapse" data-target="#slides">
+                    <i class="fa fa-fw fa-gear"></i> Slides
+                    <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+
+                <ul id="slides" class="collapse">
+                    <li>
+                        <a href=""> Thêm Slide </a>
+                    </li>
+                    <li>
+                        <a href=""> Xem các Slide </a>
+                    </li>
+                </ul>
+
+            </li>
+
+            <li>
+                <a href="#" data-toggle="collapse" data-target="#boxes">
+                    <i class="fa fa-fw fa-dropbox"></i> Box
+                    <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+
+                <ul id="boxes" class="collapse">
+                    <li>
+                        <a href=""> Thêm Box </a>
+                    </li>
+                    <li>
+                        <a href=""> Xem Boxes </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="">
+                    <i class="fa fa-fw fa-users"></i> Xem khách hàng
+                </a>
+            </li>
+
+            <li>
+                <a href="">
+                    <i class="fa fa-fw fa-book"></i> Xem đơn đặt hàng
+                </a>
+            </li>
+
+            <li>
+                <a href="">
+                    <i class="fa fa-fw fa-money"></i> Xem thanh toán
+                </a>
+            </li>
+
+            <li>
+                <a href="#" data-toggle="collapse" data-target="#users">
+                    <i class="fa fa-fw fa-users"></i> Người dùng
+                    <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+
+                <ul id="users" class="collapse">
+                    <li>
+                        <a href=""> Thêm người dùng </a>
+                    </li>
+                    <li>
+                        <a href=""> Xem người dùng </a>
+                    </li>
+                    <li>
+                        <a href=""> Chỉnh sửa thông tin người dùng </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="/Admin/Admin/Logout">
+                    <i class="fa fa-fw fa-power-off"></i> Đăng xuất
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+</nav>
+
+<script src="~/js/boostrap-337.js"></script>
+<script src="~/js/jquery-331.js"></script>

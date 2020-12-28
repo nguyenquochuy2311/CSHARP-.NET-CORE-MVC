@@ -9,14 +9,16 @@
 
 
 
-@if (ViewData["noti"] == "Dang nhap thanh cong")
+@if (ViewData["noti"].ToString() != "Dang nhap thanh cong")
+
 {
-    //Html.Partial("~/Views/MyAccount/Index.cshtml");
-    //ViewData["Title"] = "Account Page";
-}
-else
-{
+    <script type="text/javascript">
+    window.onload = function(){
+        alert('@ViewData["noti"]');
+    };
+    </script>
     Html.Partial("~/Views/Login/Index.cshtml");
 }
+
 
 

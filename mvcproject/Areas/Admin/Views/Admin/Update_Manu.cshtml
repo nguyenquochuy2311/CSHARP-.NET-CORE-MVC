@@ -1,0 +1,103 @@
+﻿@using mvcproject.Areas.Admin.Models;
+@using mvcproject.Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Admin Page";
+    Layout = "_Admin";
+}
+
+@{
+    Admin item = (Admin)ViewData["admin"];
+}
+
+@{
+    Manufacturer manu = (Manufacturer)ViewData["manu"];
+}
+
+@if (ViewData["chk_addmenu"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('Cap nhat loi');
+        };
+    </script>
+}
+
+<div id="wrapper">
+    @Html.Partial("Sidebar")
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ol class="breadcrumb">
+                        <li>
+                            <i class="fa fa-dashboard"></i> Bảng điều khiển / Chỉnh sửa nhà sản xuất
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-money fa-fw"></i> Chỉnh sửa nhà sản xuất
+                            </h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <form method="post" asp-area="Admin" asp-controller="Admin" asp-action="Confirm_UpdateManu" class="form-horizontal" enctype="multipart/form-data">
+                                <input hidden name="Manufacturer_id" value="@manu.Manufacturer_id"  type="text" class="form-control">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Tên nhà sản xuất </label>
+                                    <div class="col-md-6">
+                                        <input name="Manufacturer_title" type="text" class="form-control"
+                                               value="@manu.Manufacturer_title">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Kiểm tra </label>
+                                    <div class="col-md-6">
+                                        <input type="radio" value="yes" name="Manufacturer_top" @if (manu.Manufacturer_top.ToString() == "yes") { @("checked = 'checked'") ; }>
+
+                                        <label>Yes</label>
+
+                                        <input type="radio" value="no" name="Manufacturer_top" @if (manu.Manufacturer_top.ToString() == "no") { @("checked = 'checked'") ; }>
+
+                                        <label>No</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Hình ảnh nhà sản xuất </label>
+                                    <div class="col-md-6">
+                                        <input type="file" name="files" value="@manu.Manufacturer_image" class="form-control" multiple>
+
+                                        <br />
+
+                                        <img src="~/other_images/@manu.Manufacturer_image" class="img-responsive">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"></label>
+                                    <div class="col-md-6">
+                                        <input name="update" value="Cập nhật nhà sản xuất" type="submit"
+                                               class="btn btn-primary form-control">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/boostrap-337.js"></script>
+<script src="~/js/jquery-331.js"></script>

@@ -1,0 +1,92 @@
+﻿@using mvcproject.Areas.Admin.Models;
+@using mvcproject.Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Admin Page";
+    Layout = "_Admin";
+}
+
+@{
+    Admin item = (Admin)ViewData["admin"];
+}
+
+@if (ViewData["chk_addmenu"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('Them loi');
+        };
+    </script>
+}
+
+
+<div id="wrapper">
+    @Html.Partial("Sidebar")
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-dashboard"></i> Bảng điều khiển / Thêm nhà sản xuất
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-money fa-fw"></i> Thêm nhà sản xuất
+                            </h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <form method="post" asp-area="Admin" asp-controller="Admin" asp-action="Confirm_AddManu" class="form-horizontal" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Tên nhà sản xuất </label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="Manufacturer_title" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Kiểm tra nhà sản xuất </label>
+                                    <div class="col-md-6">
+                                        <input type="radio" value="yes" name="Manufacturer_top">
+                                        <label>Yes</label>
+
+                                        <input type="radio" value="no" name="Manufacturer_top">
+                                        <label>No</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"> Hình ảnh của nhà sản xuất </label>
+                                    <div class="col-md-6">
+                                        <input type="file" name="files" class="form-control" multiple required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"></label>
+                                    <div class="col-md-6">
+                                        <input name="submit" value="Thêm nhà sản xuất" type="submit"
+                                               class="btn btn-primary form-control">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/boostrap-337.js"></script>
+<script src="~/js/jquery-331.js"></script>

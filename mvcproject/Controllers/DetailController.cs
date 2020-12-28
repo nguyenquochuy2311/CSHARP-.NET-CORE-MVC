@@ -29,10 +29,27 @@ namespace mvcproject.Controllers
 
             ViewBag.ProductOffer = DataStore.Instance.Get(DataStore.PRODUCT_OFFER);
 
-            if (HttpContext.Session.GetString("email") != "")
+            if (HttpContext.Session.GetString("email") != null)
                 ViewData["email"] = DataStore.Instance.Get_Session(HttpContext.Session.GetString("email"));
             else
                 ViewData["email"] = DataStore.Instance.Get_Session(DataStore.GET_EMAIL);
+
+            if(HttpContext.Session.GetInt32("check_addcart")!=null)
+            {
+                if (HttpContext.Session.GetInt32("check_addcart") == 1)
+                {
+                    ViewData["check_addcart"] = 1;
+                }
+                else
+                {
+                    ViewData["check_addcart"] = 0;
+                }
+                HttpContext.Session.Remove("check_addcart");
+            }
+
+            ViewData["count_cart"] = context.Count_Cart();
+
+            ViewData["sum_money"] = context.Sum_Cart();
 
             return View();
         }

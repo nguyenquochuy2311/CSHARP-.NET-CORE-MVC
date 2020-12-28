@@ -3,13 +3,21 @@
     ViewData["Title"] = "Home Page";
 }
 
-@if (ViewData["noti"] != null)
+@if (ViewData["chk_login"] != null)
 {
     <script type="text/javascript">
     window.onload = function(){
-        alert('@ViewData["noti"]');
+        alert('@ViewData["chk_login"]');
     };
     </script>
+}
+@if(ViewData["chk_order"]!=null)
+{
+<script type="text/javascript">
+    window.onload = function(){
+        alert('@ViewData["chk_order"]');
+    };
+</script>
 }
 <!--Bat dau Slide-->
 <div class="container" id="slider">

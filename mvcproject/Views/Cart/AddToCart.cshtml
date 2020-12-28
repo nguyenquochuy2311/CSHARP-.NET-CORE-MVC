@@ -1,1 +1,18 @@
-﻿
+﻿@if (Convert.ToInt32(ViewData["chk_cart"]) == 1)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("Them gio hang thanh cong");
+        };
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("San pham da ton tai trong gio hang");
+        };
+        window.location.reload();
+    </script>
+}
+

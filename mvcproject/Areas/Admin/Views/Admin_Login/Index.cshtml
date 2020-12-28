@@ -1,0 +1,29 @@
+﻿@using mvcproject.Areas.Admin.Models;
+@using mvcproject.Models;
+@{
+    ViewData["Title"] = "Admin Login";
+    Layout = "_Admin_Login";
+}
+
+@if (ViewData["chk_login"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('Email hoac mat khau khong dung');
+        };
+    </script>
+}
+
+<div class="container">
+    <form action="/Admin/Admin_Login/Check_Login" class="form-login" method="post">
+        <h2 class="form-login-heading"> Đăng nhập Admin </h2>
+
+        <input type="text" class="form-control" placeholder="Nhập Email" name="Admin_email" required>
+
+        <input type="password" class="form-control" placeholder="Nhập mật khẩu" name="Admin_pass" required>
+
+        <button class="btn btn-lg btn-primary btn-block" name="admin_login">
+            Đăng nhập
+        </button>
+    </form>
+</div>

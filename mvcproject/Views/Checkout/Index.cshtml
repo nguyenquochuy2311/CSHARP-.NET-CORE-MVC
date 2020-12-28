@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["title"] = "Checkout Page";
+}
+
+@if (ViewData["chk_order"] != null)
+{
+<script type="text/javascript">
+        window.onload = function () {
+            alert('@ViewData["chk_order"]');
+        };
+</script>
+}
+
+<!--Bat dau content cua san pham-->
+<div id="content">
+    <div class="container">
+        <div class="col-md-12">
+
+            <ul class="breadcrumb">
+                <!--Thu tu trang-->
+                <li>
+                    <a href="/">Trang chủ</a>
+                </li>
+                <li>
+                    Chọn phương thức thanh toán
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+            <div class="box">
+
+                <h1 class="text-center">Hình thức thanh toán</h1>
+
+                <p class="lead text-center">
+                    <a href="/Checkout/Confirm_Order"> Thanh toán offline </a>
+                </p>
+
+                <center>
+                    <p class="lead">
+                        <a href="#">
+                            Thanh toán bằng AirPay
+                            <hr>
+                            <img class="img-responsive" src="~/images/paypal_logo.jpg" alt="img-airpay">
+                        </a>
+                    </p>
+                </center>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+            <div id="order-summary" class="box">
+                <div class="box-header">
+                    <h3>Tổng tiền đơn hàng</h3>
+                </div>
+
+                <p class="text-muted">
+                    Đã tính bao gồm thuế và phí vận chuyển
+                </p>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td> Tổng đơn hàng </td>
+                                <th> @ViewData["sum_money"] <u>đ</u> </th>
+                            </tr>
+                            <tr>
+                                <td> Phí vận chuyển và ship </td>
+                                <td> 1.000 </td>
+                            </tr>
+                            <tr>
+                                <td> Thuế </td>
+                                <th> 2.000 </th>
+                            </tr>
+                            <tr class="total">
+                                <td> Tổng </td>
+                                <th> @ViewData["sum_money"] <u>đ</u> </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Ket thuc content cua san pham-->

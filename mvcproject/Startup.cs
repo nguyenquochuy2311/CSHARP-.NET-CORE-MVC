@@ -18,6 +18,7 @@ namespace mvcproject
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Models.StoreContext.InitProductList(1000);
         }
 
         public static IConfiguration Configuration { get; set; }
@@ -59,6 +60,10 @@ namespace mvcproject
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "areaRoute",
+                    template: "{area:exists}/{controller=Admin_Login}/{action=Index}/{id?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

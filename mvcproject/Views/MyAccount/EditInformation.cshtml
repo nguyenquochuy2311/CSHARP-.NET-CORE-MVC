@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Edit Information";
+    Customer customer = ViewBag.Customer;
+}
+<div class="container">
+    <div class="col-md-3">@Html.Partial("~/Views/MyAccount/SidebarAccount.cshtml")</div>
+    <div class="col-md-9 box">
+        <center>
+            <h1>Chỉnh sửa thông tin</h1>
+            <p class="text-muted">
+                Nếu có bất kỳ câu hỏi gì, vui lòng liên hệ đến mục <a href="../lienhe.php">
+                    <bold>Liên hệ</bold>
+                </a>. Dịch vụ chăm sóc khách hàng làm việc <strong>24/7</strong>
+            </p>
+        </center>
+
+        <hr>
+
+        <form action="/MyAccount/EditInformation_Send" method="post">
+            <div class="form-group">
+                <label> Tên khách hàng </label>
+                <input type="text" name="Customer_name" class="form-control" value="@customer.Customer_name" required>
+            </div>
+
+            <div class="form-group">
+                <label> Email </label>
+                <input type="text" name="Customer_email" readonly="readonly" class="form-control" value="@customer.Customer_email" required>
+            </div>
+
+            <div class="form-group">
+                <label> Liên hệ </label>
+                <input type="text" name="Customer_contact" class="form-control" value="@customer.Customer_contact" required>
+            </div>
+
+            <div class="form-group">
+                <label> Địa chỉ </label>
+                <input type="text" name="Customer_address" class="form-control" value="@customer.Customer_address" required>
+            </div>
+
+            <div class="form-group">
+                <label> Ảnh đại diện </label>
+                <input type="file" name="Customer_image" value="@customer.Customer_image" class="form-control form-height-custom">
+                <img style="width:210px;height:270px;" src="~/images/customer_image/@customer.Customer_image" alt="Customer Image"
+                     class="img-responsive">
+            </div>
+
+            <div class="text-center">
+                <button name="update" class="btn btn-primary">
+                    <i class="fa fa-user-md"></i> Xác nhận cập nhật
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

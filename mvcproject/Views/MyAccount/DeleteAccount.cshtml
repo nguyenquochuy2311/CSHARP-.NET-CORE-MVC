@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Delete Account";
+}
+<div class="container">
+    <div class="col-md-3">@Html.Partial("~/Views/MyAccount/SidebarAccount.cshtml");</div>
+    <div class="col-md-9 box">
+        <center>
+            <h1>Bạn có chắc chắn muốn xoá tài khoản ?</h1>
+            <a name="Yes" href="/MyAccount/DeleteAccount" class="btn btn-danger">Có, tôi muốn xoá tài khoản</a>
+            <a name="No" href="/Logout/Index" class="btn btn-primary">Không, tôi sẽ giữ lại tài khoản</a>
+        </center>
+    </div>
+</div>

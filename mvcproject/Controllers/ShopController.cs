@@ -28,7 +28,13 @@ namespace mvcproject.Controllers
             else
                 ViewData["email"] = DataStore.Instance.Get_Session(DataStore.GET_EMAIL);
 
-            return View();
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(mvcproject.Models.StoreContext)) as StoreContext;
+
+            ViewData["count_cart"] = context.Count_Cart();
+
+            ViewData["sum_money"] = context.Sum_Cart();
+
+            return View(Models.StoreContext.product_list);
         }
     }
 }

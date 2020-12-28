@@ -1,4 +1,21 @@
-﻿@{ 
+﻿@{
     ViewData["Title"] = "Account Page";
 }
-<p>My Account</p>
+<div id="content">
+    <div class="container">
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="index.php">Trang chủ</a>
+                </li>
+                <li>
+                    Tài khoản của tôi
+                </li>
+            </ul>
+        </div>
+
+        <div class="container">
+            @Html.Partial("~/Views/MyAccount/MyOrder.cshtml")
+        </div>
+    </div>
+</div>
